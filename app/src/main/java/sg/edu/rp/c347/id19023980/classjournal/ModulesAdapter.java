@@ -1,6 +1,7 @@
 package sg.edu.rp.c347.id19023980.classjournal;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,9 @@ public class ModulesAdapter extends ArrayAdapter<Modules> {
         tvName = rowView.findViewById(R.id.textViewModule);
         tvCode = rowView.findViewById(R.id.textViewCode);
 
+        tvName.setText(modules.get(position).getName());
+        tvCode.setTextColor(Color.BLUE);
+        tvCode.setText(modules.get(position).getCode());
         return rowView;
 
     }
