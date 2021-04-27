@@ -8,9 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 
-public class ThridActivity extends AppCompatActivity {
+public class ThirdActivity extends AppCompatActivity {
 
-    Button btnSumbit;
+    Button btnSubmit;
     RadioButton rbtn1, rbtn2, rbtn3, rbtn4, rbtn5, rbtn6;
 
     @Override
@@ -18,9 +18,9 @@ public class ThridActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thrid);
 
-        btnSumbit= findViewById(R.id.btnSubmit);
+        btnSubmit= findViewById(R.id.btnSubmit);
 
-        btnSumbit.setOnClickListener(new View.OnClickListener(){
+        btnSubmit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
                 // Create intent & pass in String data

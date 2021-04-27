@@ -3,7 +3,6 @@ package sg.edu.rp.c347.id19023980.classjournal;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -58,7 +57,7 @@ public class SecondActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Info DG = new Info("", al.size() + 1);
-                Intent i = new Intent(SecondActivity.this, ThridActivity.class);
+                Intent i = new Intent(SecondActivity.this, ThirdActivity.class);
                 i.putExtra("ending", DG);
                 startActivityForResult(i, response);
             }
