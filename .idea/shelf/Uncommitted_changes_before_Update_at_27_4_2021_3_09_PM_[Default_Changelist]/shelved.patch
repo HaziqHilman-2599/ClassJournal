@@ -1,0 +1,66 @@
+Index: app/src/main/java/sg/edu/rp/c347/id19023980/classjournal/ThridActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package sg.edu.rp.c347.id19023980.classjournal;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.RadioButton;\r\n\r\npublic class ThridActivity extends AppCompatActivity {\r\n\r\n    Button btnSumbit;\r\n    RadioButton rbtn1, rbtn2, rbtn3, rbtn4, rbtn5, rbtn6;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_thrid);\r\n\r\n        btnSumbit= findViewById(R.id.btnSubmit);\r\n\r\n        btnSumbit.setOnClickListener(new View.OnClickListener(){\r\n            @Override\r\n            public void onClick(View arg0) {\r\n                // Create intent & pass in String data\r\n                Intent i = new Intent();\r\n\r\n                rbtn1 = findViewById(R.id.radioButton);\r\n                if (rbtn1.isChecked()){\r\n                    i.putExtra(\"grade\", \"A\");\r\n                }\r\n                rbtn2 = findViewById(R.id.radioButton2);\r\n                if (rbtn2.isChecked()){\r\n                    i.putExtra(\"grade\", \"B\");\r\n                }\r\n                rbtn3 = findViewById(R.id.radioButton3);\r\n                if (rbtn3.isChecked()){\r\n                    i.putExtra(\"grade\", \"C\");\r\n                }\r\n                rbtn4 = findViewById(R.id.radioButton4);\r\n                if (rbtn4.isChecked()){\r\n                    i.putExtra(\"grade\", \"D\");\r\n                }\r\n                rbtn5 = findViewById(R.id.radioButton5);\r\n                if (rbtn5.isChecked()){\r\n                    i.putExtra(\"grade\", \"F\");\r\n                }\r\n                rbtn6 = findViewById(R.id.radioButton6);\r\n                if (rbtn6.isChecked()){\r\n                    i.putExtra(\"grade\", \"X\");\r\n                }\r\n\r\n                setResult(RESULT_OK, i);\r\n                finish();\r\n\r\n            }});\r\n\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/sg/edu/rp/c347/id19023980/classjournal/ThridActivity.java	(revision 51e114b46794da105b6ce8ddbf0060f4a6516414)
++++ app/src/main/java/sg/edu/rp/c347/id19023980/classjournal/ThridActivity.java	(date 1619507342567)
+@@ -7,9 +7,11 @@
+ import android.view.View;
+ import android.widget.Button;
+ import android.widget.RadioButton;
++import android.widget.TextView;
+ 
+ public class ThridActivity extends AppCompatActivity {
+ 
++    TextView tv;
+     Button btnSumbit;
+     RadioButton rbtn1, rbtn2, rbtn3, rbtn4, rbtn5, rbtn6;
+ 
+@@ -18,6 +20,13 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_thrid);
+ 
++        tv = findViewById(R.id.tvWeek);
++
++        Intent intentReceived = getIntent();
++        int week = intentReceived.getIntExtra("weekNum", 0);
++
++        tv.setText("Week "+week);
++
+         btnSumbit= findViewById(R.id.btnSubmit);
+ 
+         btnSumbit.setOnClickListener(new View.OnClickListener(){
+Index: app/src/main/java/sg/edu/rp/c347/id19023980/classjournal/SecondActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package sg.edu.rp.c347.id19023980.classjournal;\r\n\r\nimport android.content.Intent;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.os.Parcelable;\r\nimport android.view.View;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.ListView;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class SecondActivity extends AppCompatActivity {\r\n    ListView lv;\r\n    TextView tvGrades;\r\n    ArrayList<Info> al;\r\n    ArrayAdapter<Info> aa;\r\n    Button btnInfo, btnAdd, btnEmail;\r\n    String link = \"\";\r\n    int response = 1;\r\n\r\n    @Override\r\n    protected void onCreate(@Nullable Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.second_main);\r\n\r\n        lv = this.findViewById(R.id.lvInfo);\r\n        tvGrades = findViewById(R.id.tvGrades);\r\n        btnInfo = findViewById(R.id.buttonInfo);\r\n        btnAdd = findViewById(R.id.buttonAdd);\r\n        btnEmail = findViewById(R.id.btnEmail);\r\n\r\n        Intent intentReceived = getIntent();\r\n        String module = intentReceived.getStringExtra(\"Code\");\r\n\r\n        al = new ArrayList<Info>();\r\n\r\n        if (module.equals(\"C302\")) {\r\n            al.add(new Info(\"A\", 1));\r\n            al.add(new Info(\"B\", 2));\r\n            link = \"https://www.rp.edu.sg/schools-courses/courses/full-time-diplomas/full-time-courses/modules/index/C219\";\r\n\r\n        } else if (module.equals(\"C347\")) {\r\n            al.add(new Info(\"B\", 1));\r\n            al.add(new Info(\"C\", 2));\r\n            al.add(new Info(\"A\", 3));\r\n            link = \"https://www.rp.edu.sg/schools-courses/courses/full-time-diplomas/full-time-courses/modules/index/C346\";\r\n        }\r\n\r\n        aa = new InfoAdapter(this, R.layout.info, al);\r\n        lv.setAdapter(aa);\r\n        btnAdd.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Info DG = new Info(\"\", al.size() + 1);\r\n                Intent i = new Intent(SecondActivity.this, ThridActivity.class);\r\n                i.putExtra(\"ending\", DG);\r\n                startActivityForResult(i, response);\r\n            }\r\n        });\r\n\r\n        btnInfo.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                // Intent to display data\r\n                Intent rpIntent = new Intent(Intent.ACTION_VIEW);\r\n                // Set the URL to be used.\r\n                rpIntent.setData(Uri.parse(link));\r\n                startActivity(rpIntent);\r\n            }\r\n        });\r\n        btnEmail.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent email = new Intent(Intent.ACTION_SEND);\r\n                email.putExtra(Intent.EXTRA_EMAIL,\r\n                        new String[]{\"jason_lim@rp.edu.sg\"});\r\n                email.putExtra(Intent.EXTRA_SUBJECT,\r\n                        \"Test Email from C347\");\r\n                email.setType(\"message/rfc822\");\r\n                startActivity(Intent.createChooser(email,\r\n                        \"Choose an Email client :\"));\r\n            }\r\n        });\r\n    }\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        if (resultCode == RESULT_OK) {\r\n            if (data != null) {\r\n                String like = data.getStringExtra(\"chooses\");\r\n                if (requestCode == response) {\r\n                    al.add(new Info(data.getStringExtra(\"grade\"), al.size() + 1));\r\n                }\r\n                aa = new InfoAdapter(this, R.layout.row, al);\r\n                lv.setAdapter(aa);\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/sg/edu/rp/c347/id19023980/classjournal/SecondActivity.java	(revision 51e114b46794da105b6ce8ddbf0060f4a6516414)
++++ app/src/main/java/sg/edu/rp/c347/id19023980/classjournal/SecondActivity.java	(date 1619507322355)
+@@ -59,7 +59,7 @@
+             public void onClick(View view) {
+                 Info DG = new Info("", al.size() + 1);
+                 Intent i = new Intent(SecondActivity.this, ThridActivity.class);
+-                i.putExtra("ending", DG);
++                i.putExtra("weekNum", al.size()+1);
+                 startActivityForResult(i, response);
+             }
+         });
+@@ -82,6 +82,12 @@
+                         new String[]{"jason_lim@rp.edu.sg"});
+                 email.putExtra(Intent.EXTRA_SUBJECT,
+                         "Test Email from C347");
++                String text = "";
++                for(int z = 0; z < al.size() ; z++){
++                    text += "Week "+al.get(z).getWeek()+": DG: "+al.get(z).getGrade()+"\n";
++                }
++                String textSend = "Hi faci, \nI am ... \nPlease see my remarks so far, thank you! \n"+text;
++                email.putExtra(Intent.EXTRA_TEXT, textSend);
+                 email.setType("message/rfc822");
+                 startActivity(Intent.createChooser(email,
+                         "Choose an Email client :"));

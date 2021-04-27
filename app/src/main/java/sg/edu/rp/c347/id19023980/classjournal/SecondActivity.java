@@ -58,7 +58,7 @@ public class SecondActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Info DG = new Info("", al.size() + 1);
                 Intent i = new Intent(SecondActivity.this, ThirdActivity.class);
-                i.putExtra("ending", DG);
+                i.putExtra("weekNum", al.size()+1);
                 startActivityForResult(i, response);
             }
         });
@@ -81,6 +81,12 @@ public class SecondActivity extends AppCompatActivity {
                         new String[]{"jason_lim@rp.edu.sg"});
                 email.putExtra(Intent.EXTRA_SUBJECT,
                         "Test Email from C347");
+                String text = "";
+                for(int z = 0; z < al.size() ; z++){
+                    text += "Week "+al.get(z).getWeek()+": DG: "+al.get(z).getGrade()+"\n";
+                }
+                String textSend = "Hi faci, \nI am ... \nPlease see my remarks so far, thank you! \n"+text;
+                email.putExtra(Intent.EXTRA_TEXT, textSend);
                 email.setType("message/rfc822");
                 startActivity(Intent.createChooser(email,
                         "Choose an Email client :"));
