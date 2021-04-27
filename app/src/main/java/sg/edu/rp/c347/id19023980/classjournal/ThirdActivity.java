@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 public class ThirdActivity extends AppCompatActivity {
 
+    TextView tvWeek;
     Button btnSubmit;
     RadioButton rbtn1, rbtn2, rbtn3, rbtn4, rbtn5, rbtn6;
 
@@ -18,7 +20,13 @@ public class ThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thrid);
 
-        btnSubmit= findViewById(R.id.btnSubmit);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        tvWeek = findViewById(R.id.tvWeek);
+
+        Intent intentReceived = getIntent();
+        int week = intentReceived.getIntExtra("weekNum",0);
+
+        tvWeek.setText("Week "+week);
 
         btnSubmit.setOnClickListener(new View.OnClickListener(){
             @Override
