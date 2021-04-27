@@ -26,7 +26,7 @@ public class SecondActivity extends AppCompatActivity {
         lv = this.findViewById(R.id.lvInfo);
         tvGrades = findViewById(R.id.tvGrades);
         btnInfo = findViewById(R.id.buttonInfo);
-        btnAdd = findViewById(R.id.buttonAdd);
+        btnAdd = findViewById(R.id.buttonEmail);
         btnEmail = findViewById(R.id.buttonEmail);
 
         Intent intentReceived = getIntent();

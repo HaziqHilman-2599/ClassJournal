@@ -5,35 +5,35 @@
 
     <ListView
         android:id="@+id/lvInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="686dp">
-
-    </ListView>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="bottom|end">
 
         <Button
             android:id="@+id/buttonInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Info" />
-
-        <Button
-            android:id="@+id/buttonAdd"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Add" />
+            android:text="INFO" />
 
         <Button
             android:id="@+id/buttonEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Email Faci" />
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/btnEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Email" />
     </LinearLayout>
+
 </LinearLayout>
