@@ -21,7 +21,7 @@ public class SecondActivity extends AppCompatActivity {
     ArrayList<Info> al;
     ArrayAdapter<Info> aa;
     Button btnInfo, btnAdd, btnEmail;
-
+    String link = "";
     int response = 1;
 
     @Override
@@ -43,12 +43,13 @@ public class SecondActivity extends AppCompatActivity {
         if (module.equals("C302")) {
             al.add(new Info("A", 1));
             al.add(new Info("B", 2));
+            link = "https://www.rp.edu.sg/schools-courses/courses/full-time-diplomas/full-time-courses/modules/index/C219";
 
         } else if (module.equals("C347")) {
             al.add(new Info("B", 1));
             al.add(new Info("C", 2));
             al.add(new Info("A", 3));
-
+            link = "https://www.rp.edu.sg/schools-courses/courses/full-time-diplomas/full-time-courses/modules/index/C346";
         }
 
         aa = new InfoAdapter(this, R.layout.info, al);
@@ -69,7 +70,7 @@ public class SecondActivity extends AppCompatActivity {
                 // Intent to display data
                 Intent rpIntent = new Intent(Intent.ACTION_VIEW);
                 // Set the URL to be used.
-                rpIntent.setData(Uri.parse("http://www.rp.edu.sg"));
+                rpIntent.setData(Uri.parse(link));
                 startActivity(rpIntent);
             }
         });
