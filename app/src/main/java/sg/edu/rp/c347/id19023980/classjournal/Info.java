@@ -1,6 +1,8 @@
 package sg.edu.rp.c347.id19023980.classjournal;
 
-public class Info {
+import java.io.Serializable;
+
+public class Info implements Serializable {
     private String grade;
     private int week;
 

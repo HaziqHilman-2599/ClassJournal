@@ -1,7 +1,10 @@
 package sg.edu.rp.c347.id19023980.classjournal;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,6 +21,9 @@ public class SecondActivity extends AppCompatActivity {
     ArrayList<Info> al;
     ArrayAdapter<Info> aa;
     Button btnInfo, btnAdd, btnEmail;
+
+    int response = 1;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,26 +32,74 @@ public class SecondActivity extends AppCompatActivity {
         lv = this.findViewById(R.id.lvInfo);
         tvGrades = findViewById(R.id.tvGrades);
         btnInfo = findViewById(R.id.buttonInfo);
-        btnAdd = findViewById(R.id.buttonEmail);
-        btnEmail = findViewById(R.id.buttonEmail);
+        btnAdd = findViewById(R.id.buttonAdd);
+        btnEmail = findViewById(R.id.btnEmail);
 
         Intent intentReceived = getIntent();
         String module = intentReceived.getStringExtra("Code");
 
         al = new ArrayList<Info>();
 
-        if (module.equals("C302")){
-            al.add(new Info("A",1));
-            al.add(new Info("B",2));
+        if (module.equals("C302")) {
+            al.add(new Info("A", 1));
+            al.add(new Info("B", 2));
 
-        }else if (module.equals("C347")){
-            al.add(new Info("B",1));
-            al.add(new Info("C",2));
-            al.add(new Info("A",3));
+        } else if (module.equals("C347")) {
+            al.add(new Info("B", 1));
+            al.add(new Info("C", 2));
+            al.add(new Info("A", 3));
 
         }
 
-        aa = new InfoAdapter(this,R.layout.info,al);
+        aa = new InfoAdapter(this, R.layout.info, al);
         lv.setAdapter(aa);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Info DG = new Info("", al.size() + 1);
+                Intent i = new Intent(SecondActivity.this, ThridActivity.class);
+                i.putExtra("ending", DG);
+                startActivityForResult(i, response);
+            }
+        });
+
+        btnInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Intent to display data
+                Intent rpIntent = new Intent(Intent.ACTION_VIEW);
+                // Set the URL to be used.
+                rpIntent.setData(Uri.parse("http://www.rp.edu.sg"));
+                startActivity(rpIntent);
+            }
+        });
+        btnEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent email = new Intent(Intent.ACTION_SEND);
+                email.putExtra(Intent.EXTRA_EMAIL,
+                        new String[]{"jason_lim@rp.edu.sg"});
+                email.putExtra(Intent.EXTRA_SUBJECT,
+                        "Test Email from C347");
+                email.setType("message/rfc822");
+                startActivity(Intent.createChooser(email,
+                        "Choose an Email client :"));
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (data != null) {
+                String like = data.getStringExtra("chooses");
+                if (requestCode == response) {
+                    al.add(new Info(data.getStringExtra("grade"), al.size() + 1));
+                }
+                aa = new InfoAdapter(this, R.layout.row, al);
+                lv.setAdapter(aa);
+            }
+        }
     }
 }
